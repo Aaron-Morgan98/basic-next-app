@@ -1,95 +1,90 @@
+"use client"
 import Image from "next/image";
 import styles from "./page.module.css";
+import {useEffect, useState} from "react";
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
+import axios from "axios";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+
+
+//define types for each collumn
+interface DataRow{
+  id: number;
+  name: string;
+}
+
+//define columns
+const columns: GridColDef[] = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'name', headerName: 'Name', width: 400 },
+];
+
+
 
 export default function Home() {
+  const [rows, setRows] = useState<DataRow[]>([]);
+  const [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>([]);
+
+  //api call to fetch data from endpoint
+  useEffect(() =>{
+    const fetchData = async () =>{
+      try{
+        const res = await axios.get("https://api.restful-api.dev/objects");
+
+       // map data to respective ID - this data will be displayed in the rows of the table
+        const mappedData = res.data.map((item: DataRow) => ({
+          id: item.id,
+          name: item.name,
+        }));
+
+        setRows(mappedData);
+        console.log("Fetched Data: ", res);
+      } catch(err){
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // logic for when a user wants to view mroe info on a row
+  const handleSelection = (selection: GridRowSelectionModel) => {
+    // validation - if more than 1 row is selected, keep the first row only
+    if(selection.length > 1){
+      setSelectedRow([selection[0]]);
+    } else {
+      setSelectedRow(selection);
+    }
+    console.log("ID selected:", selection);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+    <div style={{ height: 550, width: '50%', margin:"auto",}}>
+      
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        pageSizeOptions={[15, 30]}
+        checkboxSelection
+        onRowSelectionModelChange={(newSelection) => handleSelection(newSelection)}
+      />
+      
+    </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <div>
+      <Stack direction="row" mt={3} justifyContent="center">
+        <Button variant="outlined" >More Info </Button>
+      </Stack>
+    </div>
+    </>
+   
   );
 }
+
