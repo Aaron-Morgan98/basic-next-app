@@ -69,7 +69,7 @@ export default function Home() {
           data: encodeURIComponent(JSON.stringify(selectedRowData.data)), 
         });
 
-        router.push(`/moreInfo?${query.toString()}`);
+        router.push(`/pages/moreInfo?${query.toString()}`);
       }
     } else {
       alert("Please select a single row to view and try again.");
