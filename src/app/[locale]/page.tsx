@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 
 interface DataRow {
@@ -21,8 +22,7 @@ const columns: GridColDef[] = [
 
 export default function Home() {
   const router = useRouter();
-
-
+  const t = useTranslations("Index")
 
 
   const [rows, setRows] = useState<DataRow[]>([]);
@@ -98,7 +98,7 @@ export default function Home() {
       <div>
         <Stack direction="row" mt={3} justifyContent="center">
           <Button variant="outlined" onClick={handleMoreInfo}>
-            More Info
+            {t("MORE_INFO_BUTTON")}
           </Button>
         </Stack>
       </div>

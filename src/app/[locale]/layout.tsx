@@ -4,8 +4,8 @@ import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { appWithTranslation, useTranslation } from 'next-i18next';
-
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
 
 
 
@@ -16,20 +16,29 @@ export const metadata: Metadata = {
   description: "Practice using Next.js",
 };
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps{
   children: React.ReactNode;
-}>) {
+  params: {
+    locale: string;
+  }
+}
+
+
+export default async function RootLayout({
+  children,
+  params: {locale},
+}: Readonly<RootLayoutProps>) {
+  const messages = await getMessages();
   return(
-      <html lang="en">
+      <html lang={locale}>
         <body className={inter.className}>
+          <NextIntlClientProvider messages={messages}>
           <AppRouterCacheProvider>         
             <Header />
             {children}
             <Footer />
           </AppRouterCacheProvider>
+          </NextIntlClientProvider>
         </body>
       </html>
   );
