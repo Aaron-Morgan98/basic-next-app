@@ -22,7 +22,7 @@ const columns: GridColDef[] = [
 
 export default function Home() {
   const router = useRouter();
-  const t = useTranslations("Index")
+  const t = useTranslations("Index");
 
 
   const [rows, setRows] = useState<DataRow[]>([]);
@@ -69,7 +69,7 @@ export default function Home() {
           data: encodeURIComponent(JSON.stringify(selectedRowData.data)), 
         });
 
-        router.push(`/pages/moreInfo?${query.toString()}`);
+        router.push(`/moreInfo?${query.toString()}`);
       }
     } else {
       alert("Please select a single row to view and try again.");

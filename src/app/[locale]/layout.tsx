@@ -33,11 +33,11 @@ export default async function RootLayout({
       <html lang={locale}>
         <body className={inter.className}>
           <NextIntlClientProvider messages={messages}>
-          <AppRouterCacheProvider>         
-            <Header />
-            {children}
-            <Footer />
-          </AppRouterCacheProvider>
+            <AppRouterCacheProvider>         
+              <Header />
+              {children}
+              <Footer />
+            </AppRouterCacheProvider>
           </NextIntlClientProvider>
         </body>
       </html>

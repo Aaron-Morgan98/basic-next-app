@@ -1,5 +1,15 @@
 {
     "Index":{
         "MORE_INFO_BUTTON": "Plus d'infos"
+    },
+
+    "Header":{
+        "TITLE": "Exercice d'intégration"
+    },
+
+    "MoreInfo":{
+        "MORE_INFORMATION": "Plus d'information",
+        "NAME": "Nom",
+        "DETAILS": "Détails"
     }
 }

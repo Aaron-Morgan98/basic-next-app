@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { Container, Typography, Card, CardContent,  Grid, List, ListItem, ListItemText, Box } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
 export default function MoreInfo() {
+//const t = useTranslations("MoreInfo");
+
   const [data, setData] = useState<any | null>(null);
   const [id, setId] = useState<string | null>(null);
   const [name, setName] =useState<string | null>(null);
@@ -24,7 +27,7 @@ export default function MoreInfo() {
 
     if (data) {
       try {
-        // data needs extrea step of being parsed
+        // data needs extra step of being parsed
         const decodedData = decodeURIComponent(data);
         const parsedData = JSON.parse(decodedData);
         setData(parsedData);

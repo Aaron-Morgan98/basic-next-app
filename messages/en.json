@@ -3,5 +3,15 @@
 {
     "Index":{
         "MORE_INFO_BUTTON": "More Info"
+    },
+
+    "Header":{
+        "TITLE": "Onboarding Exercise"
+    },
+
+    "MoreInfo":{
+        "MORE_INFORMATION": "More Information",
+        "NAME": "Name",
+        "DETAILS": "Details"
     }
 }
