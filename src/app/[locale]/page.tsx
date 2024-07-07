@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 
 interface DataRow {
@@ -22,7 +22,10 @@ const columns: GridColDef[] = [
 
 export default function Home() {
   const router = useRouter();
+  //handle the translations set up via i18n
   const t = useTranslations("Index");
+  //when switching between pages, keep the language of the users browser to display translations.
+  const locale = useLocale();
 
 
   const [rows, setRows] = useState<DataRow[]>([]);
@@ -69,7 +72,7 @@ export default function Home() {
           data: encodeURIComponent(JSON.stringify(selectedRowData.data)), 
         });
 
-        router.push(`/moreInfo?${query.toString()}`);
+        router.push(`/${locale}/moreInfo?${query.toString()}`);
       }
     } else {
       alert("Please select a single row to view and try again.");

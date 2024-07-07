@@ -4,7 +4,7 @@ import { Container, Typography, Card, CardContent,  Grid, List, ListItem, ListIt
 import { useTranslations } from 'next-intl';
 
 export default function MoreInfo() {
-//const t = useTranslations("MoreInfo");
+  const t = useTranslations("MoreInfo");
 
   const [data, setData] = useState<any | null>(null);
   const [id, setId] = useState<string | null>(null);
@@ -16,6 +16,7 @@ export default function MoreInfo() {
     const id = queryParams.get("id");
     const name = queryParams.get("name");
     const data = queryParams.get("data");
+
     //set and decode info sent over from main page
     if (id) {
       setId(id);
@@ -54,7 +55,7 @@ export default function MoreInfo() {
     <Container>
       <Box sx={{ textAlign: 'center', mb: 4, mt: 4 }}>
         <Typography variant="h4">
-          More Information
+          {t("MORE_INFORMATION")}
         </Typography>
       </Box>
       
@@ -75,7 +76,7 @@ export default function MoreInfo() {
             <Card>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
-                  Name
+                  {t("NAME")}
                 </Typography>
                 <Typography variant="body1">
                   {name || 'No name available'}
@@ -94,7 +95,7 @@ export default function MoreInfo() {
                 }}
               >
                 <Typography variant="h6" gutterBottom align="center">
-                  Details
+                  {t("DETAILS")}
                 </Typography>
                 {data ? (
                   <Box sx={{ textAlign: 'center' }}>
