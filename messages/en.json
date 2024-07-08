@@ -12,6 +12,7 @@
     "MoreInfo":{
         "MORE_INFORMATION": "More Information",
         "NAME": "Name",
-        "DETAILS": "Details"
+        "DETAILS": "Details",
+        "BACK_BUTTON": "Back"
     }
 }
