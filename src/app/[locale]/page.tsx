@@ -81,7 +81,7 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ height: 550, width: "50%", margin: "auto" }}>
+      <div style={{ height: 550, width: "50%", margin: "auto", marginTop: 50}}>
         <DataGrid
           rows={rows}
           columns={columns}
