@@ -5,7 +5,6 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 
 
