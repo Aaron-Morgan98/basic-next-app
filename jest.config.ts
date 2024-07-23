@@ -14,7 +14,17 @@ const config: Config = {
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    
   },
+
+  //below adds table to test results showing test coverage etc
+  collectCoverage: true,
+ 
+  // An array of glob patterns indicating a set of files for which coverage information should be collected
+  collectCoverageFrom: ["src/**/*.{ts,tsx,js}","!src/test/","!src/index.*", "!src/*.{ts,tsx,js}"],
+
+  // The directory where Jest should output its coverage files
+  coverageDirectory: "coverage",
 }
  
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
