@@ -74,7 +74,7 @@ export default function Home() {
   //   }
   // };
 
-  //TODO: make api call to fetch data 
+  //TODO: make api call to fetch data -- make server component 
   const handleMoreInfo = () => {
     if (selectedRow.length === 1) {
       const selectedRowData = rows.find((row) => row.id === selectedRow[0]);
@@ -98,15 +98,15 @@ export default function Home() {
   return (
     <>
     
-      <ObjectList rows={rows} handleSelection={handleSelection} />
+      <ObjectList rows={rows} handleSelection={handleSelection} handleMoreInfo={handleMoreInfo}/>
 
-      <div>
+      {/* <div>
         <Stack direction="row" mt={3} justifyContent="center">
           <Button variant="outlined" onClick={handleMoreInfo}>
             {t("MORE_INFO_BUTTON")}
           </Button>
         </Stack>
-      </div>
+      </div> */}
     </>
   );
 }

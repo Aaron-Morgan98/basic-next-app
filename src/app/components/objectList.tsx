@@ -6,11 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from "../components/button";
 
 
 interface Props {
     rows: any,
-    handleSelection: any
+    handleSelection: any,
+    handleMoreInfo: any,
   };
 
   const columns: GridColDef[] = [
@@ -21,23 +23,9 @@ interface Props {
 export default function ObjectList(props:Props){
 
     return(
-        <div style={{ height: 550, width: "50%", margin: "auto", marginTop: 50}}>
-        <DataGrid
-          rows={props.rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 15 },
-            },
-          }}
-          pageSizeOptions={[15, 30]}
-          checkboxSelection
-          onRowSelectionModelChange={(newSelection) =>
-            props.handleSelection(newSelection)
-          }
-        />
+        <div style={{ height: 550, width: "40%", margin: "auto", marginTop: 50}}>
 
-      {/* <TableContainer component={Paper}>
+      <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -49,19 +37,23 @@ export default function ObjectList(props:Props){
               <TableBody>
                 {props.rows.map((row: any) => (
                   <TableRow
-                    key={row.name}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    key={row.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0} }}
                   >
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
                     <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="right">
+                      <Button handleMoreInfo={props.handleMoreInfo}/>
+                    </TableCell>
 
                   </TableRow>
                 ))}
+
               </TableBody>
             </Table>
-          </TableContainer> */}
+          </TableContainer>
       </div>
     );
 };
