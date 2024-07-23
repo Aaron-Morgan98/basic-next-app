@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
+import ObjectList from "../components/objectList";
 
 
 interface DataRow {
@@ -14,11 +15,6 @@ interface DataRow {
   data: any;
 }
 
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "name", headerName: "Name", width: 400 },
-];
-
 export default function Home() {
   const router = useRouter();
   //handle the translations set up via i18n
@@ -26,7 +22,7 @@ export default function Home() {
   //when switching between pages, keep the language of the users browser to display translations.
   const locale = useLocale();
 
-
+  
   const [rows, setRows] = useState<DataRow[]>([]);
   const [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>([]);
 
@@ -80,22 +76,8 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ height: 550, width: "50%", margin: "auto", marginTop: 50}}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 15 },
-            },
-          }}
-          pageSizeOptions={[15, 30]}
-          checkboxSelection
-          onRowSelectionModelChange={(newSelection) =>
-            handleSelection(newSelection)
-          }
-        />
-      </div>
+    
+      <ObjectList rowData={rows} handleSelection={handleSelection} />
 
       <div>
         <Stack direction="row" mt={3} justifyContent="center">
