@@ -24,7 +24,6 @@ export default function Home() {
 
 
   const [rows, setRows] = useState<DataRow[]>([]);
-  const [selectedRow, setSelectedRow] = useState<GridRowSelectionModel>([]);
 
 
   useEffect(() => {
@@ -46,14 +45,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleSelection = (selection: GridRowSelectionModel) => {
-    if (selection.length > 1) {
-      setSelectedRow([selection[0]]);
-    } else {
-      setSelectedRow(selection);
-    }
-    console.log("ID selected:", selection);
-  };
+
 
   // const handleMoreInfo = () => {
   //   if (selectedRow.length === 1) {
@@ -75,30 +67,35 @@ export default function Home() {
   // };
 
   //TODO: make api call to fetch data -- make server component 
-  const handleMoreInfo = () => {
-    if (selectedRow.length === 1) {
-      const selectedRowData = rows.find((row) => row.id === selectedRow[0]);
-      if (selectedRowData) {
-        // Use encodeURIComponent to ensure proper URL encoding
-        const query = new URLSearchParams({
-          id: selectedRowData.id,
-          // Serialise and encode name and data to be sent over to be displayed on more info page
-          name: encodeURIComponent(selectedRowData.name), 
-          data: encodeURIComponent(JSON.stringify(selectedRowData.data)), 
-        });
+  // const handleMoreInfo = () => {
+  //   if (selectedRow.length === 1) {
+  //     const selectedRowData = rows.find((row) => row.id === selectedRow[0]);
+  //     if (selectedRowData) {
+  //       // Use encodeURIComponent to ensure proper URL encoding
+  //       const query = new URLSearchParams({
+  //         id: selectedRowData.id,
+  //         // Serialise and encode name and data to be sent over to be displayed on more info page
+  //         name: encodeURIComponent(selectedRowData.name), 
+  //         data: encodeURIComponent(JSON.stringify(selectedRowData.data)), 
+  //       });
 
-        router.push(`/${locale}/moreInfo?${query.toString()}`);
-      }
-    } else {
-      alert("Please select a single row to view and try again.");
-    }
-  };
+  //       router.push(`/${locale}/moreInfo?${query.toString()}`);
+  //     }
+  //   } else {
+  //     alert("Please select a single row to view and try again.");
+  //   }
+  // };
 
 
   return (
     <>
     
-      <ObjectList rows={rows} handleSelection={handleSelection} handleMoreInfo={handleMoreInfo}/>
+      <ObjectList 
+        rows={rows}
+        handleButton={""}
+        collumnOne={"ID"}
+        collumnTwo={"Name"}
+        collumnThree={"More Information"} />
 
       {/* <div>
         <Stack direction="row" mt={3} justifyContent="center">

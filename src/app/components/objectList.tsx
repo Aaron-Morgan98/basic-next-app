@@ -6,19 +6,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from "../components/button";
+import MyButton from "../components/button";
 
 
 interface Props {
     rows: any,
-    handleSelection: any,
-    handleMoreInfo: any,
+    handleButton: any,
+    collumnOne: string,
+    collumnTwo: string,
+    collumnThree: string,
   };
 
-  const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "name", headerName: "Name", width: 400 },
-  ];
+
 
 export default function ObjectList(props:Props){
 
@@ -29,9 +28,10 @@ export default function ObjectList(props:Props){
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="right">Name</TableCell>
-                  <TableCell align="right">More Info</TableCell>
+                {/* TODO: make the collumns props */}
+                  <TableCell>{props.collumnOne}</TableCell>
+                  <TableCell align="right">{props.collumnTwo}</TableCell> 
+                  <TableCell align="right">{props.collumnThree}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -45,7 +45,7 @@ export default function ObjectList(props:Props){
                     </TableCell>
                     <TableCell align="right">{row.name}</TableCell>
                     <TableCell align="right">
-                      <Button handleMoreInfo={props.handleMoreInfo}/>
+                      <MyButton click={""} />
                     </TableCell>
 
                   </TableRow>
