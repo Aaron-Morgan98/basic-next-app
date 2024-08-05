@@ -47,28 +47,28 @@ export default async function Home() {
 
   const [rows, setRows] = useState<Data[]>([]);
 
-  const rowData = await getServerSideProps();
-  setRows(rowData);
+  // const rowData = await getServerSideProps();
+  // setRows(rowData);
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get("https://api.restful-api.dev/objects");
-  //       const mappedData = res.data.map((item: DataRow) => ({
-  //         id: item.id,
-  //         name: item.name,
-  //         data: item.data,
-  //       }));
-  //       setRows(mappedData);
-  //       console.log("Fetched Data: ", res);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("https://api.restful-api.dev/objects");
+        const mappedData = res.data.map((item: Data) => ({
+          id: item.id,
+          name: item.name,
+          data: item.data,
+        }));
+        setRows(mappedData);
+        console.log("Fetched Data: ", res);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
 
 
@@ -95,17 +95,14 @@ export default async function Home() {
 
   return (
 
-      <ObjectList 
+    <ObjectList
       rows={rows}
       collumnOne={t("ID_COLLUMN")}
       collumnTwo={t("NAME_COLLUMN")}
       collumnThree={t("MORE_INFORMATION_COLLUMN")}
       buttonClick={""}
-      buttonTranslation={t("VIEW_BUTTON")} 
-      rowKey={rows.map((row) => row.id)} 
-      rowOne={rows.map((row) => row.id)} 
-      rowTwo={rows.map((row) => row.name)}         
-      />
+      buttonTranslation={t("VIEW_BUTTON")}
+    />
 
 
   );
