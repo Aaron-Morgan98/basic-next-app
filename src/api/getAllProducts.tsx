@@ -6,7 +6,7 @@ interface Data {
     data: any,
   }
   
-  export async function getServerSideProps(){
+  export async function getData(){
     try {
       const res = await axios.get("https://api.restful-api.dev/objects");
       const mappedData = res.data.map((item: Data) => ({

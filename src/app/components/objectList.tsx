@@ -13,11 +13,11 @@ interface Props {
   collumnOne: string;
   collumnTwo: string;
   collumnThree: string;
-  buttonClick: any;
+  // buttonClick: any;
   buttonTranslation: string;
 }
 
-export default function ObjectList(props: Props) {
+export default async function ObjectList(props: Props) {
   return (
     <div style={{ height: 550, width: "50%", margin: "auto", marginTop: 50 }}>
       <TableContainer component={Paper}>
@@ -40,9 +40,9 @@ export default function ObjectList(props: Props) {
                     {row.id}
                   </TableCell>
                   <TableCell align="right">{row.name}</TableCell>
-                  <TableCell align="right">
+                  {/* <TableCell align="right">
                     <DefaultButton click={props.buttonClick} translation={props.buttonTranslation} />
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))
             ) : (

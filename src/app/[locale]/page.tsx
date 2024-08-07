@@ -4,7 +4,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import ObjectList from "../components/objectList";
-import {getServerSideProps} from "../../api/getAllProducts";
+import {getData} from "../../api/getAllProducts";
+
 
 
 interface Data {
@@ -13,63 +14,20 @@ interface Data {
   data: any,
 }
 
-// export async function getServerSideProps(){
-//   try {
-//     const res = await axios.get("https://api.restful-api.dev/objects");
-//     const mappedData = res.data.map((item: DataRow) => ({
-//       id: item.id,
-//       name: item.name,
-//       data: item.data,
-//     }));
-//     console.log("Fetched Data: ", res);
-//     return{
-//       props:{
-//         data: mappedData
-//       }
-//     }
-//   } catch (err) {
-//     console.error(err);
-//   }
-
-// }
-
-
-
-
 
 export default async function Home() {
-  const router = useRouter();
+  // const router = useRouter();
+
+  //when switching between pages, keep the language of the users browser to display translations.
+  // const locale = useLocale();
+
   //handle the translations set up via i18n
   const t = useTranslations("Home");
-  //when switching between pages, keep the language of the users browser to display translations.
-  const locale = useLocale();
-
 
   const [rows, setRows] = useState<Data[]>([]);
 
-  // const rowData = await getServerSideProps();
-  // setRows(rowData);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("https://api.restful-api.dev/objects");
-        const mappedData = res.data.map((item: Data) => ({
-          id: item.id,
-          name: item.name,
-          data: item.data,
-        }));
-        setRows(mappedData);
-        console.log("Fetched Data: ", res);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const res = await getData();
+  setRows(res);
 
 
   //TODO: make api call to fetch data -- make server component 
@@ -100,7 +58,7 @@ export default async function Home() {
       collumnOne={t("ID_COLLUMN")}
       collumnTwo={t("NAME_COLLUMN")}
       collumnThree={t("MORE_INFORMATION_COLLUMN")}
-      buttonClick={""}
+      // buttonClick={""}
       buttonTranslation={t("VIEW_BUTTON")}
     />
 
