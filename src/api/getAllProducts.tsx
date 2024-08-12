@@ -18,6 +18,7 @@ interface Data {
       return mappedData;
     } catch (err) {
       console.error(err);
+      return[];
     }
   
   }
