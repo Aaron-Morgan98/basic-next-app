@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from 'react';
 import { Container, Typography, Card, CardContent,  Grid, List, ListItem, ListItemText, Box } from '@mui/material';
 import { useTranslations } from 'next-intl';

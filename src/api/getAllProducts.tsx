@@ -1,8 +1,8 @@
 import axios from "axios";
 
 interface Data {
-    id: string,
-    name: string,
+    id: string;
+    name: string;
     data: any,
   }
   
