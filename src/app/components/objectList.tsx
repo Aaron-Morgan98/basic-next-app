@@ -1,4 +1,3 @@
-// components/objectList.tsx (Client Component)
 "use client";
 import { useTranslations } from "next-intl";
 import Table from "@mui/material/Table";
@@ -9,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DefaultButton from "../components/defaultButton";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 
 interface Props {
   rows: any[];
@@ -16,9 +17,12 @@ interface Props {
 
 export default function ObjectList({ rows }: Props) {
   const t = useTranslations("Home");
+  const router = useRouter();
+  const locale = useLocale();
 
   const handleMoreInfoClick = (id: string) => {
     console.log("More info clicked for ID:", id);
+    router.push(`/${locale}/moreInfo?id=${id}`);
   };
 
   return (

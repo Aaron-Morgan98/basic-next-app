@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import ObjectList from "../components/objectList";
 import {getData} from "../../api/getAllProducts";
 
@@ -11,7 +10,7 @@ export default async function Home() {
   //when switching between pages, keep the language of the users browser to display translations.
   // const locale = useLocale();
 
-  //handle the translations set up via i18n
+
   const rows = await getData();
 
 

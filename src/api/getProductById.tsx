@@ -1,12 +1,12 @@
 import axios from "axios";
 
 interface Data {
-    id: string;
+    id: string | null;
     name: string;
     data: any;
 }
 
-export async function getDataById(id: Data){
+export async function getDataById(id: string | null){
     try{
         const res = await axios.get(`https://api.restful-api.dev/objects/${id}`);
         const mappedData = res.data.map((item: Data) => ({
