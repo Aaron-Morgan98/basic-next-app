@@ -22,7 +22,7 @@ export default function ObjectList({ rows }: Props) {
 
   const handleMoreInfoClick = (id: string) => {
     console.log("More info clicked for ID:", id);
-    router.push(`/${locale}/moreInfo?id=${id}`);
+    router.push(`/${locale}/moreInfo/${id}`);
   };
 
   return (

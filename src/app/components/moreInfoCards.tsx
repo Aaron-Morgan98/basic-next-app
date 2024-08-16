@@ -2,6 +2,7 @@
 import { Container, Typography, Card, CardContent,  Grid, List, ListItem, ListItemText, Box } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
+import {useParams} from "next/navigation";
 
 
 interface Props{
@@ -13,16 +14,19 @@ interface Props{
 
 export default function MoreInfoCards({id, name, data}: Props){
     const t = useTranslations("MoreInfo");
+    const params = useParams<{locale:string}>;
+    
+    console.log(params);
 
 
-   const dataId = useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const paramId = urlParams.get("id");
+//    const dataId = useEffect(() => {
+//         const urlParams = new URLSearchParams(window.location.search);
+//         const paramId = urlParams.get("id");
 
-        return() => {
-            paramId;
-        } 
-    },[]);
+//         return() => {
+//             paramId;
+//         } 
+//     },[]);
 
     // const [data, setData] = useState<any | null>(null);
     // const [id, setId] = useState<string | null>(null);

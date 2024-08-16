@@ -1,4 +1,4 @@
-import MoreInfo from "../src/app/[locale]/moreInfo/page";
+import MoreInfo from "../src/app/[locale]/moreInfo/[id]/page";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useRouter } from "next/navigation";

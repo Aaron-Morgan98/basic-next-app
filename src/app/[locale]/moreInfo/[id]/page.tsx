@@ -5,18 +5,23 @@ import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
-import MoreInfoCards from "../../components/moreInfoCards";
-import {getDataById} from "../../../api/getProductById";
+import MoreInfoCards from "../../../components/moreInfoCards";
+import {getDataById} from "../../../../api/getProductById";
 
 
-
-export default async function MoreInfo(context: any) {
+export default async function MoreInfo({
+  params: {id},
+} : {
+  params:{
+    id:string;
+  };
+}) {
   // const t = useTranslations("MoreInfo");
   // const router = useRouter();
   
   // const urlParams = new URLSearchParams(window.location.search);
   // const id = urlParams.get("id");
-  const id = context.query;
+
 
   const data = await getDataById(id);
 
