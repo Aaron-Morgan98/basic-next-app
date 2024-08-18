@@ -22,24 +22,16 @@ export default async function MoreInfo({
 
   console.log(data);
 
-  // turn the JSON data into a more readable format by splitting into key value pairs
-  // const renderDataList = (data: Record<string, any>) => {
-  //   return (
-  //     <List>
-  //       {Object.entries(data).map(([key, value]) => (
-  //         <ListItem key={key}>
-  //           <ListItemText primary={key} secondary={String(value)} />
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   );
-  // };
-
-  // const handleBackButtonClick = () =>{
-  //   router.push("/");
-  // };
+  if (!data) {
+    return (
+      <Container>
+        <Typography variant="h6">No data found for ID: {id}</Typography>
+      </Container>
+    );
+  }
 
   return (
-        <MoreInfoCards id={data.id} name={data.name} data={data.data} />
+    <MoreInfoCards id={data.id} name={data.name} data={data.data} />
   );
 }
+

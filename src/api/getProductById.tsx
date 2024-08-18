@@ -16,9 +16,9 @@ export async function getDataById(id: string | null){
             "ID:", itemId,
             "Name:",itemName,
             "Data:",itemData);
-          return [itemId, itemName, itemData];
+          return {id: itemId, name: itemName, data: itemData};
     } catch (err){
         console.error(err);
-        return [];
+        return null;
     }
 }
