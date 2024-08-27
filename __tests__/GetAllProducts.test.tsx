@@ -13,7 +13,7 @@ describe("getData API call", () => {
       { id: "2", name: "Item 2", data: { someField: "value2" } }
     ];
 
-    // Mocking the resolved value of the axios.get call
+    // Mocking the value the axios call would get
     mockedAxios.get.mockResolvedValue({ data: mockData });
 
     const result = await getData();
@@ -31,7 +31,7 @@ describe("getData API call", () => {
   });
 
   it("returns an empty array when the API call fails", async () => {
-    // Mocking the rejected value of the axios.get call
+    // Mocking rejected axios call
     mockedAxios.get.mockRejectedValue(new Error("API call failed"));
 
     const result = await getData();

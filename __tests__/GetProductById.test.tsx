@@ -13,7 +13,7 @@ describe("getDataById API call", () => {
       data: { someField: "value1" }
     };
 
-    // Mocking the resolved value of the axios.get call
+    // Mocking what the axios call would get
     mockedAxios.get.mockResolvedValue({ data: mockResponseData });
 
     const result = await getDataById("1");
@@ -31,12 +31,12 @@ describe("getDataById API call", () => {
   });
 
   it("returns null when the API call fails", async () => {
-    // Mocking the rejected value of the axios.get call
+    // Mocing rejected axios call
     mockedAxios.get.mockRejectedValue(new Error("API call failed"));
 
     const result = await getDataById("1");
 
-    expect(result).toBeNull();  // Expected to return null on error
+    expect(result).toBeNull();
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith("https://api.restful-api.dev/objects/1");
   });
