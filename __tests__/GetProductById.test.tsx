@@ -46,6 +46,6 @@ describe("getDataById API call", () => {
 
     // Since axios won't be called if id is null, assert no call is made
     expect(result).toBeNull();
-    //expect(mockedAxios.get).not.toHaveBeenCalled();
+    
   });
 });
