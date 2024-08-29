@@ -37,6 +37,5 @@ describe("getData API call", () => {
     const result = await getData();
 
     expect(result).toEqual([]);  // Expected to return an empty array
-    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
   });
 });

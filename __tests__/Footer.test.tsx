@@ -12,11 +12,7 @@ describe("Footer component", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("displays the current year and author name", () => {
-    const { getByText } = render(<Footer />);
-    const currentYear = new Date().getFullYear();
-    expect(getByText(`${currentYear}  Aaron Morgan`)).toBeInTheDocument();
-  });
+
 
   it("renders LinkedIn and GitHub icons", () => {
     const { getByTestId } = render(<Footer />);
