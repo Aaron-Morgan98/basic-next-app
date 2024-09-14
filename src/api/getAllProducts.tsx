@@ -17,7 +17,7 @@ interface Data {
       console.log("Fetched Data: ", res);
       return mappedData;
     } catch (err) {
-      console.error(err);
+      console.log(err);
       return[];
     }
   

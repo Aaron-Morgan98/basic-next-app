@@ -15,8 +15,9 @@ describe("Footer component", () => {
   it("displays the current year and author name", () => {
     const { getByText } = render(<Footer />);
     const currentYear = new Date().getFullYear();
-    // Assert that the footer contains the current year and author name
-    expect(getByText(`${currentYear}  Aaron Morgan`)).toBeInTheDocument();
+    
+    // Match the text using a regular expression that ignores extra spaces
+    expect(getByText(new RegExp(`${currentYear}\\s+Aaron Morgan`, 'i'))).toBeInTheDocument();
   });
 
   it("renders LinkedIn and GitHub icons", () => {

@@ -1,11 +1,18 @@
 import axios from "axios";
-import { getData } from "../src/api/getAllProducts";
+import { getData } from "../src/api/getAllProducts"; 
 
 jest.mock("axios");
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("getData API call", () => {
+  // Mock console.log 
+  const logSpy = jest.spyOn(global.console, "log").mockImplementation(() => {});
+  const errorSpy = jest.spyOn(global.console, "error").mockImplementation(() => {});
+
+  afterEach(() => {
+    jest.clearAllMocks(); // Clear mocks after each test
+  });
 
   it("fetches and returns mapped data when API call is successful", async () => {
     const mockData = [
@@ -13,12 +20,10 @@ describe("getData API call", () => {
       { id: "2", name: "Item 2", data: { someField: "value2" } }
     ];
 
-    // Mocking the resolved value of the axios.get call
     mockedAxios.get.mockResolvedValue({ data: mockData });
 
     const result = await getData();
 
-    // Expected result after mapping
     const expectedData = mockData.map(item => ({
       id: item.id,
       name: item.name,
@@ -31,7 +36,6 @@ describe("getData API call", () => {
   });
 
   it("returns an empty array when the API call fails", async () => {
-    // Mocking the rejected value of the axios.get call
     mockedAxios.get.mockRejectedValue(new Error("API call failed"));
 
     const result = await getData();
