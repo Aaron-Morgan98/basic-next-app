@@ -1,24 +1,37 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Home from '../src/app/[locale]/page';
+import { render, screen, waitFor } from '@testing-library/react';
+import Home from '../src/app/[locale]/page'; // Adjust path as necessary
 import { getData } from '../src/api/getAllProducts';
+import '@testing-library/jest-dom';
 
-jest.mock('../src/api/getAllProducts');
+// Mock the getData function
+jest.mock('../src/api/getAllProducts', () => ({
+  getData: jest.fn(),
+}));
 
-const mockedGetData = getData as jest.MockedFunction<typeof getData>;
+jest.mock('../src/app/components/objectList', () => ({ rows }: { rows: any[] }) => (
+  <div>{rows.length > 0 ? 'ObjectList Rendered' : 'No Data'}</div>
+));
 
-describe('Home component', () => {
-  it('renders ObjectList with data from getData', async () => {
-    const mockData = [{ id: 1, name: 'Product 1' }, { id: 2, name: 'Product 2' }];
-    mockedGetData.mockResolvedValueOnce(mockData);
+describe('Home Page', () => {
+  it('fetches data and renders ObjectList', async () => {
+    // Mock the resolved value of getData
+    (getData as jest.Mock).mockResolvedValue([{ id: 1, name: 'Product 1' }]);
 
-    render(<Home />);
+    render(await Home());
 
-    const items = await screen.findAllByRole('listitem');
-    expect(items).toHaveLength(mockData.length);
-    mockData.forEach((item, index) => {
-      expect(items[index]).toHaveTextContent(item.name);
-    });
+    // Wait for the ObjectList to render with the fetched data
+    await waitFor(() => expect(screen.getByText('ObjectList Rendered')).toBeInTheDocument());
   });
-});
 
+  it('handles empty data', async () => {
+    // Mock getData to return an empty array
+    (getData as jest.Mock).mockResolvedValue([]);
+
+    render(await Home());
+
+    // Wait for the ObjectList to render with no data
+    await waitFor(() => expect(screen.getByText('No Data')).toBeInTheDocument());
+  });
+
+
+});

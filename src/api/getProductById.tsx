@@ -8,7 +8,7 @@ interface Data {
 
 export async function getDataById(id: string | null) {
     if (!id) {
-        console.error("No ID provided");
+        console.log("No ID provided");
         return null;  
     }
     
@@ -21,7 +21,7 @@ export async function getDataById(id: string | null) {
         console.log("Fetched Data: ", "ID:", itemId, "Name:", itemName, "Data:", itemData);
         return { id: itemId, name: itemName, data: itemData };
     } catch (err) {
-        console.error(err);
+        console.log(err);
         return null;
     }
 }

@@ -6,7 +6,7 @@ jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("getData API call", () => {
-  // Mock console.log 
+  // Mock console.log and console.error to avoid cluttering test output
   const logSpy = jest.spyOn(global.console, "log").mockImplementation(() => {});
   const errorSpy = jest.spyOn(global.console, "error").mockImplementation(() => {});
 
@@ -41,5 +41,6 @@ describe("getData API call", () => {
     const result = await getData();
 
     expect(result).toEqual([]);  // Expected to return an empty array
+    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
   });
 });
