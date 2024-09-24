@@ -1,8 +1,11 @@
 
 
 {
-    "Index":{
-        "MORE_INFO_BUTTON": "More Info"
+    "Home":{
+        "VIEW_BUTTON": "View",
+        "ID_COLLUMN": "ID",
+        "NAME_COLLUMN": "Name",
+        "MORE_INFORMATION_COLLUMN": "More Information"
     },
 
     "Header":{

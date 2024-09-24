@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component renders correctly and matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="footerContainer"
+  >
+    <div
+      class="footer"
+    >
+      <p>
+        2024  Aaron Morgan
+      </p>
+    </div>
+    <div
+      class="icons"
+    >
+      <div
+        data-testid="LinkedInIcon"
+      />
+      <div
+        data-testid="GitHubIcon"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

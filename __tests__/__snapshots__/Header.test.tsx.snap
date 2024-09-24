@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component renders correctly and matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="headerContainer"
+  >
+    <div
+      class="title"
+    >
+      <h1>
+         Mocked Title 
+      </h1>
+    </div>
+  </div>
+</DocumentFragment>
+`;

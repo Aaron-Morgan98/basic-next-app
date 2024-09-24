@@ -1,6 +1,9 @@
 {
-    "Index":{
-        "MORE_INFO_BUTTON": "Plus d'infos"
+    "Home":{
+        "VIEW_BUTTON": "Regarder",
+        "ID_COLLUMN": "ID",
+        "NAME_COLLUMN": "Nom",
+        "MORE_INFORMATION_COLLUMN": "Plus d'information"
     },
 
     "Header":{
