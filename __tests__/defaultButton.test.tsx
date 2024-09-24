@@ -1,26 +1,28 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom'; 
 import DefaultButton from '../src/app/components/defaultButton'; 
+
 describe('DefaultButton', () => {
   it('renders with the correct translation', () => {
-    render(<DefaultButton click={jest.fn()} translation="Click Me" />);
+    render(<DefaultButton click={jest.fn()} translation="Click" />);
     
     // Check if the button displays the correct translation
-    const buttonElement = screen.getByRole('button', { name: /Click Me/i });
+    const buttonElement = screen.getByRole('button', { name: /Click/i });
     expect(buttonElement).toBeInTheDocument();
-    expect(buttonElement).toHaveTextContent('Click Me');
+    expect(buttonElement).toHaveTextContent('Click');
   });
 
-  it('triggers the click handler when clicked', () => {
-    const handleClick = jest.fn(); // Mock click handler
-    render(<DefaultButton click={handleClick} translation="Click Me" />);
+  it('triggers onClick when clicked', () => {
+    // Arrange
+    const handleClick = jest.fn(); //
+    render(<DefaultButton click={handleClick} translation="Click" />);
 
-    const buttonElement = screen.getByRole('button', { name: /Click Me/i });
+    const buttonElement = screen.getByRole('button', { name: /Click/i });
 
-    // Simulate button click
+    //  Act
     fireEvent.click(buttonElement);
 
-    // Check if the click handler was called
+    // Assert
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

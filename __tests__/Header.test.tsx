@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import Header from "../src/app/components/header";
 
-// Mock the `useTranslations` hook
+// Mock useTranslations
 jest.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key === "TITLE" ? "Mocked Title" : key,
 }));
@@ -14,7 +14,7 @@ describe("Header component", () => {
 
   it("displays the correct title text", () => {
     const { getByText } = render(<Header />);
-    // Assert that the title contains the mocked text
+    // Assert
     expect(getByText("Mocked Title")).toBeInTheDocument();
   });
 });

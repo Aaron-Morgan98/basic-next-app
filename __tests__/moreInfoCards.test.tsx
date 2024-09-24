@@ -3,12 +3,11 @@ import '@testing-library/jest-dom'; // for extended matchers like "toBeInTheDocu
 import MoreInfoCards from '../src/app/components/moreInfoCards'; // Adjust the import path
 import { useRouter } from 'next/navigation';
 
-// Mock the useRouter hook from Next.js
+
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
 
-// Mock the useTranslations hook
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
 }));
@@ -21,18 +20,19 @@ describe('MoreInfoCards', () => {
   });
 
   it('renders correctly with provided data', () => {
+    //Arrange
     const mockData = { key1: 'value1', key2: 'value2' };
+
+    //Act
     render(<MoreInfoCards id="123" name="Test Item" data={mockData} />);
 
-    // Check if the ID is displayed
+    //Assert
     expect(screen.getByText(/ID/i)).toBeInTheDocument();
     expect(screen.getByText('123')).toBeInTheDocument();
 
-    // Check if the name is displayed
     expect(screen.getByText(/NAME/i)).toBeInTheDocument();
     expect(screen.getByText('Test Item')).toBeInTheDocument();
 
-    // Check if the details are displayed
     expect(screen.getByText(/DETAILS/i)).toBeInTheDocument();
     expect(screen.getByText('key1: value1')).toBeInTheDocument();
     expect(screen.getByText('key2: value2')).toBeInTheDocument();
@@ -54,13 +54,10 @@ describe('MoreInfoCards', () => {
     const mockData = { key1: 'value1' };
     render(<MoreInfoCards id="123" name="Test Item" data={mockData} />);
 
-    // Find the back button
     const backButton = screen.getByRole('button', { name: /BACK_BUTTON/i });
 
-    // Simulate click
     fireEvent.click(backButton);
 
-    // Check if the router's push function was called
     expect(mockPush).toHaveBeenCalledWith('/');
   });
 });

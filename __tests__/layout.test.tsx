@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'; // for extended matchers like "toBeInTheDocument"
-import RootLayout from '../src/app/[locale]/layout'; // Adjust the import path
+import '@testing-library/jest-dom'; 
+import RootLayout from '../src/app/[locale]/layout';
 
-// Mock the getMessages function to simulate fetching translations
+// Mock getMessages 
 jest.mock('next-intl/server', () => ({
   getMessages: jest.fn().mockResolvedValue({
-    greeting: 'Hello', // Example translation data
+    greeting: 'Hello',
   }),
 }));
 
-// Mock the NextIntlClientProvider and AppRouterCacheProvider
+
 jest.mock('next-intl', () => ({
   NextIntlClientProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
@@ -25,7 +25,7 @@ describe('RootLayout', () => {
   it('renders Header, Footer, and children', async () => {
     const mockChildren = <main>Main Content</main>;
 
-    // Mock params for locale
+    // Mock  locale
     const props = { children: mockChildren, params: { locale: 'en' } };
 
 
@@ -35,10 +35,10 @@ describe('RootLayout', () => {
   it('sets the correct language attribute on the html element', async () => {
     const mockChildren = <main>Main Content</main>;
 
-    // Mock params for locale
+
     const props = { children: mockChildren, params: { locale: 'fr' } };
 
-    // Render the async RootLayout with the "fr" locale
+
     render(await RootLayout(props));
 
   });
