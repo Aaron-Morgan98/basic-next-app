@@ -1,18 +1,18 @@
 import axios from "axios";
 
 interface Data {
-    id: string;
-    name: string;
-    data: any,
+    id: number;
+    title: string;
+    body: any,
   }
   
   export async function getData(){
     try {
-      const res = await axios.get("https://api.restful-api.dev/objects");
+      const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
       const mappedData = res.data.map((item: Data) => ({
         id: item.id,
-        name: item.name,
-        data: item.data,
+        title: item.title,
+        body: item.body,
       }));
       console.log("Fetched Data: ", res);
       return mappedData;

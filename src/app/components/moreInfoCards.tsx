@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   id: string | null;
-  name: string;
-  data: Record<string, any>;
+  title: string;
+  body: string;
 }
 
-export default function MoreInfoCards({ id, name, data }: Props) {
+export default function MoreInfoCards({ id, title, body }: Props) {
   const t = useTranslations("MoreInfo");
   const router = useRouter();
 
@@ -46,7 +46,7 @@ export default function MoreInfoCards({ id, name, data }: Props) {
                 {t("NAME")}
               </Typography>
               <Typography variant="body1">
-                {name || 'No name available'}
+                {title || 'No name available'}
               </Typography>
             </CardContent>
           </Card>
@@ -64,18 +64,8 @@ export default function MoreInfoCards({ id, name, data }: Props) {
               <Typography variant="h6" gutterBottom align="center">
                 {t("DETAILS")}
               </Typography>
-              {/* Split json data provided from data into key value pairs to be displayed */}
-              {data ? (
-                <Box sx={{ textAlign: 'center' }}>
-                  {Object.entries(data).map(([key, value]) => (
-                    <Typography variant="body1" key={key}>
-                      {key}: {value}
-                    </Typography>
-                  ))}
-                </Box>
-              ) : (
-                <Typography>No data available</Typography>
-              )}
+              
+              {body || 'No name available'}
             </CardContent>
           </Card>
         </Grid>

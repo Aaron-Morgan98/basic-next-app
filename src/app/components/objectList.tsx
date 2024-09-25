@@ -46,7 +46,7 @@ export default function ObjectList({ rows }: Props) {
                   <TableCell component="th" scope="row">
                     {row.id}
                   </TableCell>
-                  <TableCell align="right">{row.name}</TableCell>
+                  <TableCell align="right">{row.title}</TableCell>
                   <TableCell align="right">
                     <DefaultButton
                       click={() => handleMoreInfoClick(row.id)}

@@ -9,7 +9,7 @@ export default async function MoreInfo({
   params: {id},
 } : {
   params:{
-    id:string;
+    id:number;
   };
 }) {
 
@@ -27,7 +27,7 @@ export default async function MoreInfo({
   }
 
   return (
-    <MoreInfoCards id={data.id} name={data.name} data={data.data} />
+    <MoreInfoCards id={data.id} title={data.name} body={data.data} />
   );
 }
 
