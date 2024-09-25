@@ -8,7 +8,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe("getData API call", () => {
   // Mock console
   const logSpy = jest.spyOn(global.console, "log").mockImplementation(() => {});
-  const errorSpy = jest.spyOn(global.console, "error").mockImplementation(() => {});
+
 
   afterEach(() => {
     jest.clearAllMocks(); // Clear mocks after each test
@@ -17,8 +17,8 @@ describe("getData API call", () => {
   //Arrange
   it("fetches and returns mapped data when API call is successful", async () => {
     const mockData = [
-      { id: "1", name: "Item 1", data: { someField: "value1" } },
-      { id: "2", name: "Item 2", data: { someField: "value2" } }
+      { id: 1, title: "Item 1", body: "Value 1" },
+      { id: 2, title: "Item 2", body: "Value 2" }
     ];
 
     mockedAxios.get.mockResolvedValue({ data: mockData });
@@ -27,14 +27,14 @@ describe("getData API call", () => {
     //Act
     const expectedData = mockData.map(item => ({
       id: item.id,
-      name: item.name,
-      data: item.data,
+      title: item.title,
+      body: item.body,
     }));
 
     //Assert
     expect(result).toEqual(expectedData);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith("https://api.restful-api.dev/objects");
+    expect(mockedAxios.get).toHaveBeenCalledWith("https://jsonplaceholder.typicode.com/posts");
   });
 
   //Test for when API call fails

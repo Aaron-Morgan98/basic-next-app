@@ -5,7 +5,7 @@ import DefaultButton from "../components/defaultButton";
 import { useRouter } from "next/navigation";
 
 interface Props {
-  id: string | null;
+  id: number | null;
   title: string;
   body: string;
 }

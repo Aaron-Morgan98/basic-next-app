@@ -14,36 +14,36 @@ describe("getDataById API call", () => {
   it("fetches and returns data when API call is successful", async () => {
     //Arrange
     const mockResponseData = {
-      id: "1",
-      name: "Item 1",
-      data: { someField: "value1" }
+      id: 1,
+      title: "Item 1",
+      body: "Value 1"
     };
 
     mockedAxios.get.mockResolvedValue({ data: mockResponseData });
 
     //Act
-    const result = await getDataById("1");
+    const result = await getDataById(1);
 
     const expectedData = {
       id: mockResponseData.id,
-      name: mockResponseData.name,
-      data: mockResponseData.data,
+      title: mockResponseData.title,
+      body: mockResponseData.body,
     };
     //Assert
     expect(result).toEqual(expectedData);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith("https://api.restful-api.dev/objects/1");
+    expect(mockedAxios.get).toHaveBeenCalledWith("https://jsonplaceholder.typicode.com/posts/1");
   });
 
   it("returns null when the API call fails", async () => {
     //Arrange
     mockedAxios.get.mockRejectedValue(new Error("API call failed"));
     //Act
-    const result = await getDataById("1");
+    const result = await getDataById(1);
     //Assert
     expect(result).toBeNull();
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.get).toHaveBeenCalledWith("https://api.restful-api.dev/objects/1");
+    expect(mockedAxios.get).toHaveBeenCalledWith("https://jsonplaceholder.typicode.com/posts/1");
   });
 
   it("returns null when the provided id is null", async () => {

@@ -8,43 +8,45 @@ jest.mock('../src/api/getProductById', () => ({
   getDataById: jest.fn(),
 }));
 
-jest.mock('../src/app/components/moreInfoCards', () => ({ id, name, data }: { id: string, name: string, data: any }) => (
-  <div>{`MoreInfoCards rendered for ${name}`}</div>
+jest.mock('../src/app/components/moreInfoCards', () => ({ id, title, body }: { id: number, title: string, body: any }) => (
+  <div>{`MoreInfoCards rendered for ${title}`}</div>
 ));
 
 describe('MoreInfo Page', () => {
   it('renders MoreInfoCards when data is available', async () => {
     // Arrange
     (getDataById as jest.Mock).mockResolvedValue({
-      id: '1',
-      name: 'Sample Product',
-      data: { detail: 'Some details' }
+      id: 1,
+      name: 'Sample product',
+      data: "Some data"
     });
-    //Act
-    render(await MoreInfo({ params: { id: '1' } }));
 
-    //Assert
-    await waitFor(() => expect(screen.getByText('MoreInfoCards rendered for Sample Product')).toBeInTheDocument());
+    // Act
+    render(await MoreInfo({ params: { id: 1 } }));
+
+    // Assert
+    await waitFor(() => expect(screen.getByText('MoreInfoCards rendered for Sample product')).toBeInTheDocument());
   });
 
   it('displays a "No data found" message when data is not available', async () => {
-    //Arrange
+    // Arrange
     (getDataById as jest.Mock).mockResolvedValue(null);
-    //Act
-    render(await MoreInfo({ params: { id: '999' } }));
 
-    //Assert
-    await waitFor(() => expect(screen.getByText('No data found for ID: 999')).toBeInTheDocument());
+    // Act
+    render(await MoreInfo({ params: { id: 100 } }));
+
+    // Assert
+    await waitFor(() => expect(screen.getByText('No data found for ID: 100')).toBeInTheDocument());
   });
 
   it('handles empty data correctly', async () => {
-    //Arrange
-    (getDataById as jest.Mock).mockResolvedValue({});
+    // Arrange
+    (getDataById as jest.Mock).mockResolvedValue({ id: 1, name: '', data: '' });
 
-    //Act
-    render(await MoreInfo({ params: { id: '1' } }));
+    // Act
+    render(await MoreInfo({ params: { id: 1 } }));
 
-    //Assert
+    // Assert
     await waitFor(() => expect(screen.queryByText('No data found')).not.toBeInTheDocument());
   });
 });

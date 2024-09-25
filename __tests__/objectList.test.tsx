@@ -26,16 +26,16 @@ describe("ObjectList Component", () => {
   it("renders the table with data", () => {
     //Arrange
     const rows = [
-      { id: "1", name: "Item 1" },
-      { id: "2", name: "Item 2" },
+      { id: 1, title: "Item 1" },
+      { id: 2, title: "Item 2" },
     ];
     //Act
     render(<ObjectList rows={rows} />);
 
     // Assert
-    expect(screen.getByText("1")).toBeInTheDocument();
+    expect(screen.getByText(1)).toBeInTheDocument();
     expect(screen.getByText("Item 1")).toBeInTheDocument();
-    expect(screen.getByText("2")).toBeInTheDocument();
+    expect(screen.getByText(2)).toBeInTheDocument();
     expect(screen.getByText("Item 2")).toBeInTheDocument();
   });
 
@@ -47,7 +47,7 @@ describe("ObjectList Component", () => {
 
   it("calls handleMoreInfoClick when 'More Info' button is clicked", () => {
     //Arrange
-    const rows = [{ id: "1", name: "Item 1" }];
+    const rows = [{ id: 1, title: "Item 1" }];
 
     //Act
     render(<ObjectList rows={rows} />);

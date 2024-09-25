@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom'; // for extended matchers like "toBeInTheDocument"
-import MoreInfoCards from '../src/app/components/moreInfoCards'; // Adjust the import path
+import '@testing-library/jest-dom'; 
+import MoreInfoCards from '../src/app/components/moreInfoCards'; 
 import { useRouter } from 'next/navigation';
-
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
@@ -21,38 +20,40 @@ describe('MoreInfoCards', () => {
 
   it('renders correctly with provided data', () => {
     //Arrange
-    const mockData = { key1: 'value1', key2: 'value2' };
+    const mockData = { id: 123, title: 'Test Item', body: 'Some details about the item' };
 
     //Act
-    render(<MoreInfoCards id="123" name="Test Item" data={mockData} />);
+    render(<MoreInfoCards id={mockData.id} title={mockData.title} body={mockData.body} />);
 
     //Assert
+    expect(screen.getByText(/MORE_INFORMATION/i)).toBeInTheDocument();
+
     expect(screen.getByText(/ID/i)).toBeInTheDocument();
-    expect(screen.getByText('123')).toBeInTheDocument();
+    expect(screen.getByText(123)).toBeInTheDocument();
 
     expect(screen.getByText(/NAME/i)).toBeInTheDocument();
     expect(screen.getByText('Test Item')).toBeInTheDocument();
 
-    expect(screen.getByText(/DETAILS/i)).toBeInTheDocument();
-    expect(screen.getByText('key1: value1')).toBeInTheDocument();
-    expect(screen.getByText('key2: value2')).toBeInTheDocument();
+
+    expect(screen.getByText('Some details about the item')).toBeInTheDocument();
   });
 
   it('renders "No ID available" if id is null', () => {
-    render(<MoreInfoCards id={null} name="Test Item" data={{}} />);
+    render(<MoreInfoCards id={null} title="Test Item" body="Some details" />);
     
     expect(screen.getByText('No ID available')).toBeInTheDocument();
   });
 
-  it('renders "No name available" if name is empty', () => {
-    render(<MoreInfoCards id="123" name="" data={{}} />);
+  it('renders "No name available" if title is empty', () => {
+    const mockData = { id: 123, title: '', body: 'Some details' };
+    render(<MoreInfoCards id={mockData.id} title={mockData.title} body={mockData.body} />);
     
     expect(screen.getByText('No name available')).toBeInTheDocument();
   });
 
   it('navigates back when the button is clicked', () => {
-    const mockData = { key1: 'value1' };
-    render(<MoreInfoCards id="123" name="Test Item" data={mockData} />);
+    const mockData = { id: 123, title: 'Test Item', body: 'Some details' };
+    render(<MoreInfoCards id={mockData.id} title={mockData.title} body={mockData.body} />);
 
     const backButton = screen.getByRole('button', { name: /BACK_BUTTON/i });
 
