@@ -27,7 +27,7 @@ export default async function MoreInfo({
   }
 
   return (
-    <MoreInfoCards id={data.id} title={data.name} body={data.data} />
+    <MoreInfoCards id={data.id} title={data.title} body={data.body} />
   );
 }
 

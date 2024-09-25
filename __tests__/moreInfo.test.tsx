@@ -17,8 +17,8 @@ describe('MoreInfo Page', () => {
     // Arrange
     (getDataById as jest.Mock).mockResolvedValue({
       id: 1,
-      name: 'Sample product',
-      data: "Some data"
+      title: 'Sample product',
+      body: "Some data"
     });
 
     // Act
@@ -41,7 +41,7 @@ describe('MoreInfo Page', () => {
 
   it('handles empty data correctly', async () => {
     // Arrange
-    (getDataById as jest.Mock).mockResolvedValue({ id: 1, name: '', data: '' });
+    (getDataById as jest.Mock).mockResolvedValue({ id: 1, title: '', body: '' });
 
     // Act
     render(await MoreInfo({ params: { id: 1 } }));
